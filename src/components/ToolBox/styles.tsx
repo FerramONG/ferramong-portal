@@ -7,6 +7,7 @@ export const Container = styled.div`
     flex-direction: column;
     width: 70%;
     padding:1rem;
+    margin:2rem;
     font-family: Roboto,sans-serif;
     position:relative;
 
@@ -36,7 +37,7 @@ export const Container = styled.div`
         outline:none;
     }
 
-    .expandButton{
+    .expandedContainerButton{
         position:absolute;
         bottom:0;
         right:0;
@@ -46,6 +47,12 @@ export const Container = styled.div`
         width: 3rem;
     }
 
+    .display{
+        display:block;
+    }
+    .noDisplay{
+        display:none;
+    }
 `;
 
 export const MainInfo = styled.div`

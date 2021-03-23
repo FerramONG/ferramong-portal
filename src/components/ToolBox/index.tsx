@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send } from './styles'
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 interface ToolProps {
     img: string;
@@ -12,14 +14,14 @@ interface ToolProps {
 
 export default function ToolBox(props: ToolProps) {
 
-    const [buttonText, setButtonText] = useState("+");
-
+    const [expandedContainer, setExpandedContainer] = useState(false);
+    
     const changeButton = () => {
-        if (buttonText === "+") {
-            setButtonText("-");
+        if (expandedContainer == true) {
+            setExpandedContainer(false);
         }
         else {
-            setButtonText("+");
+            setExpandedContainer(true);
         }
     }
 
@@ -36,16 +38,17 @@ export default function ToolBox(props: ToolProps) {
                 <h2>{props.price} CrediTools</h2>
             </MainInfo>
 
-            <ExtraInfo>
+            <ExtraInfo className={expandedContainer ? "display" : "noDisplay"}>
                 <h4><b>Utilidade: </b>{props.utility}</h4>
                 <h4><b>Como usar: </b>{props.use}</h4>
             </ExtraInfo>
 
-            <Send>
+            <Send className={expandedContainer ? "display" : "noDisplay"}>
                 <button type="button">Quero!</button>
             </Send>
-            <button type="button" className="expandButton" onClick={() => changeButton()}>
-                {buttonText}
+            
+            <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
+            {expandedContainer ? <RemoveIcon/> : <AddIcon/>}
             </button>
         </Container>
     )
