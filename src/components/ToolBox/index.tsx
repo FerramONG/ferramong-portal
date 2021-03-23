@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send } from './styles'
 
 interface ToolProps {
@@ -11,12 +11,23 @@ interface ToolProps {
 }
 
 export default function ToolBox(props: ToolProps) {
-    console.log(props);
+
+    const [buttonText, setButtonText] = useState("+");
+
+    const changeButton = () => {
+        if (buttonText === "+") {
+            setButtonText("-");
+        }
+        else {
+            setButtonText("+");
+        }
+    }
+
     return (
         <Container>
             <MainInfo>
                 <LeftPannel>
-                        <img src={props.img} alt="cortador de grama" />
+                    <img src={props.img} alt="cortador de grama" />
                     <NameCategory>
                         <h2>{props.name}</h2>
                         <h6>{props.category}</h6>
@@ -33,6 +44,9 @@ export default function ToolBox(props: ToolProps) {
             <Send>
                 <button type="button">Quero!</button>
             </Send>
+            <button type="button" className="expandButton" onClick={() => changeButton()}>
+                {buttonText}
+            </button>
         </Container>
     )
 }

@@ -8,6 +8,7 @@ export const Container = styled.div`
     width: 70%;
     padding:1rem;
     font-family: Roboto,sans-serif;
+    position:relative;
 
     h2{
         font-size:2rem;
@@ -18,6 +19,33 @@ export const Container = styled.div`
     h6{
         font-size:1rem;
     }
+
+    button{
+        font-size: 2rem;
+        color:white;
+        background-color:#627fe7;
+        border:none;
+        padding:0.5rem 0.75rem;
+        border-radius: 1rem;
+        cursor:pointer;
+    }
+    button:hover{
+        background-color: rgba(98,127,231,0.7);
+    }
+    button:focus{
+        outline:none;
+    }
+
+    .expandButton{
+        position:absolute;
+        bottom:0;
+        right:0;
+        margin:1rem;
+        padding:none;
+        height: 3rem;
+        width: 3rem;
+    }
+
 `;
 
 export const MainInfo = styled.div`
@@ -66,19 +94,4 @@ export const ExtraInfo = styled.div`
 export const Send = styled.div`
     display:flex;
     align-self:center;
-    button{
-        font-size: 2rem;
-        color:white;
-        background-color:#627fe7;
-        border:none;
-        padding:0.5rem 0.75rem;
-        border-radius: 1rem;
-        cursor:pointer;
-    }
-    button:hover{
-        background-color: rgba(98,127,231,0.7);
-    }
-    button:focus{
-        outline:none;
-    }
 `;
