@@ -63,9 +63,9 @@ export const MainInfo = styled.div`
 
 export const LeftPannel = styled.div`
     display:flex;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     justify-content: space-between;
-    max-width:80%;
+    max-width:70%;
     img{
         height:6rem;
         width: 9rem;
