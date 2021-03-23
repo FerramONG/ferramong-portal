@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, MainInfo, LeftPannel, ExtraInfo, Send, NameCategory } from './styles'
+import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send } from './styles'
 
 interface ToolProps {
     img: string;
@@ -16,22 +16,22 @@ export default function ToolBox(props: ToolProps) {
         <Container>
             <MainInfo>
                 <LeftPannel>
-                    <h1><img src={props.img} alt="cortador de grama" /></h1>
+                        <img src={props.img} alt="cortador de grama" />
                     <NameCategory>
                         <h2>{props.name}</h2>
-                        <h4>{props.category}</h4>
+                        <h6>{props.category}</h6>
                     </NameCategory>
                 </LeftPannel>
-                <h2>{props.price}</h2>
+                <h2>{props.price} CrediTools</h2>
             </MainInfo>
 
             <ExtraInfo>
-                <h3><b>{props.utility}</b></h3>
-                <h3><b>{props.use}</b></h3>
+                <h4><b>Utilidade: </b>{props.utility}</h4>
+                <h4><b>Como usar: </b>{props.use}</h4>
             </ExtraInfo>
 
             <Send>
-                <button>Quero</button>
+                <button type="button">Quero!</button>
             </Send>
         </Container>
     )
