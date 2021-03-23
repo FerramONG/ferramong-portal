@@ -3,6 +3,6 @@ import {Container} from './styles'
 
 export default function ToolBox() {
     return (
-        <Container>Teste</Container>
+        <Container>teste</Container>
     )
 }
