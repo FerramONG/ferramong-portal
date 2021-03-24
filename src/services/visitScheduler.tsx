@@ -3,10 +3,11 @@ import { VisitDateType } from "../interfaces/visitScheduler";
 
 const url = "asd";
 
-interface GetVisitSchedulePayload {
-    visitDateType: VisitDateType
+export interface GetVisitSchedulePayload {
+    userId: String
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     get: (
         payload: GetVisitSchedulePayload
