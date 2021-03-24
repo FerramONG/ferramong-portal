@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, NavBar, Item, SearchBar,Login } from './styles'
+import SearchIcon from '@material-ui/icons/Search';
 
 export default function Menu() {
     return (
@@ -10,7 +11,7 @@ export default function Menu() {
                 <Item>CrediTools</Item>
                 <SearchBar>
                     <input type="text" placeholder="Cortador de grama..." />
-                    {/* <img src="search3.png" id="btnBusca" alt="Buscar" /> */}
+                    <button type="submit"><SearchIcon/></button>
                 </SearchBar>
                 <Login>Entrar</Login>
             </NavBar>
