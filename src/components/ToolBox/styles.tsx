@@ -7,7 +7,7 @@ export const Container = styled.div`
     flex-direction: column;
     width: 70%;
     padding:1rem;
-    margin:2rem;
+    margin:1rem;
     font-family: Roboto,sans-serif;
     position:relative;
 

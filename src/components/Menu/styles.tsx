@@ -14,6 +14,10 @@ export const NavBar = styled.ol`
     font-family:'Roboto', sans-serif;
     padding:0px 1rem;
     font-size:1.2rem;
+
+    .link{
+        text-decoration:none;
+    }
     /* position:fixed; */
 `;
 

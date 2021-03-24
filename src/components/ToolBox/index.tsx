@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send } from './styles'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import { Link } from "react-router-dom";
 
 interface ToolProps {
     img: string;
@@ -15,9 +16,9 @@ interface ToolProps {
 export default function ToolBox(props: ToolProps) {
 
     const [expandedContainer, setExpandedContainer] = useState(false);
-    
+
     const changeButton = () => {
-        if (expandedContainer == true) {
+        if (expandedContainer === true) {
             setExpandedContainer(false);
         }
         else {
@@ -44,11 +45,11 @@ export default function ToolBox(props: ToolProps) {
             </ExtraInfo>
 
             <Send className={expandedContainer ? "display" : "noDisplay"}>
-                <button type="button">Quero!</button>
+                <Link className="link" to="/"><button type="button">Quero!</button></Link>
             </Send>
-            
+
             <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
-            {expandedContainer ? <RemoveIcon/> : <AddIcon/>}
+                {expandedContainer ? <RemoveIcon /> : <AddIcon />}
             </button>
 
         </Container>
