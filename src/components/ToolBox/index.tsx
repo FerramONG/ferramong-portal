@@ -50,6 +50,7 @@ export default function ToolBox(props: ToolProps) {
             <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
             {expandedContainer ? <RemoveIcon/> : <AddIcon/>}
             </button>
+
         </Container>
     )
 }
