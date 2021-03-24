@@ -1,8 +1,11 @@
 import React from 'react';
+import VisitSchedulerModal from '../VisitScheduler';
 import {Container} from './styles'
 
 export default function ToolBox() {
     return (
-        <Container>teste</Container>
+        <Container>
+            <VisitSchedulerModal userId = {"123"}/>
+        </Container>
     )
 }
