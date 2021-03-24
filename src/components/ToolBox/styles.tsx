@@ -101,4 +101,7 @@ export const ExtraInfo = styled.div`
 export const Send = styled.div`
     display:flex;
     align-self:center;
+    span{
+        font-size:1rem;
+    }
 `;
