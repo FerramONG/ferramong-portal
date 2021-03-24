@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import ToolBox from './components/ToolBox';
+import Menu from './components/Menu';
 
 function App() {
   return (
     <div className="App">
-      <ToolBox/>
+      <Menu/>
     </div>
   );
 }
