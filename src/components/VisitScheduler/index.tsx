@@ -6,9 +6,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
-import { DateTimePicker, KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { DateType } from '@date-io/type';
 import axios from 'axios';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -25,16 +27,16 @@ export default function VisitSchedulerModal(props: PropTypes) {
   const { userId } = props;
   const [openScheduleVisit, setOpenScheduleVisit] = React.useState(false);
   const [openCancelVisit, setOpenCancelVisit] = React.useState(false);
-  const [selectedDate, handleDateChange] = React.useState(new Date());
-
-  const visitDate = axios.get("1231231", { params: { userId: userId } });
+  const [hasVisit, setHasVisit] = React.useState(false);
+  const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate>(new Date());
 
   const handleClickOpen = () => {
-    if (userId === "123") {
-      setOpenScheduleVisit(true);
-    }else {
+    /*const visitDate = axios.get("1231231", { params: { userId: userId } });*/
+    if (hasVisit) {
       setOpenCancelVisit(true)
-    }    
+    } else {
+      setOpenScheduleVisit(true);
+    }
   };
 
   const handleCloseVisit = () => {
@@ -45,10 +47,19 @@ export default function VisitSchedulerModal(props: PropTypes) {
     setOpenCancelVisit(false);
   };
 
-  const handleConfirm = () => {
+  const handleConfirmVisit = () => {
+    setHasVisit(true);
+    console.log(hasVisit)
     setOpenScheduleVisit(false);
-    axios.post("123123123");
+    /* post something */
   };
+
+  const handleDeleteVisit = () => {
+    setHasVisit(false);
+    console.log(hasVisit)
+    setOpenCancelVisit(false)
+    /*post something */
+  }
 
   return (
     <div>
@@ -68,7 +79,7 @@ export default function VisitSchedulerModal(props: PropTypes) {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDateTimePicker
               value={selectedDate}
-              onChange={newDate => handleDateChange}
+              onChange={(date: MaterialUiPickersDate) => setSelectedDate(date)}
               disablePast
               ampm={false}
               onError={console.log}
@@ -80,7 +91,7 @@ export default function VisitSchedulerModal(props: PropTypes) {
           <Button onClick={handleCloseVisit} color="secondary">
             Cancelar
           </Button>
-          <Button onClick={handleConfirm} color="primary">
+          <Button onClick={handleConfirmVisit} color="primary">
             Marcar
           </Button>
         </DialogActions>
@@ -101,7 +112,7 @@ export default function VisitSchedulerModal(props: PropTypes) {
           <Button onClick={handleCloseCancelVisit} color="primary">
             voltar
           </Button>
-          <Button onClick={handleCloseCancelVisit} color="secondary">
+          <Button onClick={handleDeleteVisit} color="secondary">
             Cancelar visita
           </Button>
         </DialogActions>
