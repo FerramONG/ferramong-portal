@@ -3,6 +3,7 @@ import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send } from '
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { Link } from "react-router-dom";
+import VisitScheduler from '../../components/VisitScheduler'
 
 interface ToolProps {
     img: string;
@@ -45,7 +46,7 @@ export default function ToolBox(props: ToolProps) {
             </ExtraInfo>
 
             <Send className={expandedContainer ? "display" : "noDisplay"}>
-                <Link className="link" to="/"><button type="button">Quero!</button></Link>
+                <VisitScheduler userId = "123"></VisitScheduler>
             </Send>
 
             <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
