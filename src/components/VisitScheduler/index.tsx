@@ -12,6 +12,7 @@ import axios from 'axios';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { DialogContentText } from '@material-ui/core';
 import { format } from "date-fns";
+import { Container } from "./styles"
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -73,8 +74,8 @@ export default function VisitSchedulerModal(props: PropTypes) {
   }
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+    <Container>
+      <Button className="button" variant="contained" color="primary" onClick={handleClickOpen}>
         Emprestar ferramenta
       </Button>
       <Dialog
@@ -120,7 +121,7 @@ export default function VisitSchedulerModal(props: PropTypes) {
       >
         <DialogTitle id="alert-dialog-slide-title">{"Sua visita marcada"}</DialogTitle>
         <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText id="alert-dialog-slide-description">
             Você já tem uma visita marcada para {new Date(selectedDate?.getDate()!).toLocaleDateString()}
           </DialogContentText>
         </DialogContent>
@@ -133,6 +134,6 @@ export default function VisitSchedulerModal(props: PropTypes) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Container>
   );
 }

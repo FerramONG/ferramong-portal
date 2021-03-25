@@ -46,7 +46,7 @@ export default function ToolBox(props: ToolProps) {
             </ExtraInfo>
 
             <Send className={expandedContainer ? "display" : "noDisplay"}>
-                <VisitScheduler userId = "123"></VisitScheduler>
+                <button>Quero!</button>
             </Send>
 
             <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
