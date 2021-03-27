@@ -11,7 +11,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import axios from 'axios';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { DialogContentText } from '@material-ui/core';
-import { format } from "date-fns";
 import { Container } from "./styles"
 
 const Transition = React.forwardRef(function Transition(
@@ -33,16 +32,17 @@ export default function VisitSchedulerModal(props: PropTypes) {
   const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate>(new Date());
 
   const handleClickOpen = () => {
-    axios.get('1231231', { params: { userId: userId } }).then((response) => {
-      if (response.status === 200) {
+    axios.get('https://ferramong-scheduler.herokuapp.com/scheduler/dweller/' + userId).then((response) => {
+      if (response.data[0] !== undefined) {
+        console.log(response);
+        setSelectedDate(new Date(Date.parse(response.data[0].date)));
         setOpenCancelVisit(true);
+        //console.log();
       } else {
         setOpenScheduleVisit(true);
-        setSelectedDate(response.data.date);
       }
     }, (error) => {
       console.log(error);
-      setOpenScheduleVisit(true);
     })
   };
 
@@ -56,11 +56,11 @@ export default function VisitSchedulerModal(props: PropTypes) {
 
   const handleConfirmVisit = () => {
     //setHasVisit(true);
-    //console.log(hasVisit);
+    console.log(selectedDate);
     setOpenScheduleVisit(false);
-    axios.post('/saveVisit', {
-      userId: userId,
-      date: selectedDate,
+    axios.post('https://ferramong-scheduler.herokuapp.com/scheduler/', {
+      idDweller: parseInt(userId),
+      date: selectedDate?.toISOString(),
     });
   };
 
@@ -68,9 +68,7 @@ export default function VisitSchedulerModal(props: PropTypes) {
     //setHasVisit(false);
     //console.log(hasVisit)
     setOpenCancelVisit(false)
-    axios.post('/deleteVisit', {
-      userId: userId,
-    })
+    axios.get('https://ferramong-scheduler.herokuapp.com/unscheduler/' + userId);
   }
 
   return (
@@ -122,7 +120,7 @@ export default function VisitSchedulerModal(props: PropTypes) {
         <DialogTitle id="alert-dialog-slide-title">{"Sua visita marcada"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Você já tem uma visita marcada para {new Date(selectedDate?.getDate()!).toLocaleDateString()}
+            Você já tem uma visita marcada para {selectedDate?.toLocaleString()}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

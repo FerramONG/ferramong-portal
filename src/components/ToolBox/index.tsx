@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send } from './styles'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { Link } from "react-router-dom";
-import VisitScheduler from '../../components/VisitScheduler'
 
 interface ToolProps {
     img: string;
