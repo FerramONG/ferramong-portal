@@ -16,7 +16,7 @@ export default function Menu() {
                     <input type="text" placeholder="Cortador de grama..." />
                     <button type="submit"><SearchIcon/></button>
                 </SearchBar>
-                <Link className="link" to="search"><Login>Entrar</Login></Link>
+                <Link className="link" to="login"><Login>Entrar</Login></Link>
             </NavBar>
         </Container>
     )
