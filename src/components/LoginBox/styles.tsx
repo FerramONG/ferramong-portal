@@ -14,6 +14,7 @@ export const Component = styled.div`
     background-color: white;
     border-radius: 25px;
     padding: 100px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
 `;
 
 export const BoxForm = styled.div`
