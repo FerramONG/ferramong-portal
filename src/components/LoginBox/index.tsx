@@ -10,7 +10,7 @@ export default function LoginBox() {
                     <BoxForm>
                         <input type="text" name="cpf" placeholder="CPF"/>
                         <input type="password" name="password" placeholder="Senha" />
-                        <input type="submit" value="Entrar" id="button"/>
+                        <Link to="/"><input type="submit" value="Entrar" id="button"/></Link>
                     </BoxForm>
                 </form>
             <CreateAccount>
