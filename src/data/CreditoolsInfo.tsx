@@ -8,6 +8,16 @@ export default {
         quantity: "4000",
         value: "400",
         date: "01/04/2021",
+    },
+    {
+        quantity: "100",
+        value: "10",
+        date: "01/04/2021",
+    },
+    {
+        quantity: "500",
+        value: "50",
+        date: "01/04/2021",
     }]
    
 }

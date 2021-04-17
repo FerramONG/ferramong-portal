@@ -19,7 +19,7 @@ const CreditoolsBox = () => {
     return (
         <Container>
             <Component>
-                <h2>Saldo atual: 5000 Creditools</h2>
+                <h2>Saldo atual: XXXX Creditools</h2>
                 <h1>Histórico de compras</h1>
 
                 <Table>
@@ -31,7 +31,6 @@ const CreditoolsBox = () => {
                         </tr>
                         {data.PurchaseInfo.map(purchase => {
                             return (
-
                                 <tr>
                                     <td>{purchase.quantity} Creditools</td>
                                     <td>R${purchase.value},00</td>

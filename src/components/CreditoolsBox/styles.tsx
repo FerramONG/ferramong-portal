@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    padding-top:100px;
+    padding-top:50px;
     display:flex;
     justify-content: center;
     font-family:'Roboto', sans-serif;
@@ -28,6 +28,7 @@ export const Component = styled.div`
         padding:10px 30px;
         font-weight:bold;
         font-size:1.5rem;
+        align-self: center;
     }
 
     button{
