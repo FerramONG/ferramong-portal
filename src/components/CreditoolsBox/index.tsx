@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Container, Component, Table } from './styles'
+import { Container, Component, Table, CreditCard } from './styles'
+import { Link } from "react-router-dom";
+import data from '../../data/CreditoolsInfo'
 
 const CreditoolsBox = () => {
 
@@ -27,32 +29,40 @@ const CreditoolsBox = () => {
                             <td>Valor gasto</td>
                             <td>Data</td>
                         </tr>
-                        <tr>
-                            <td>100 Creditools</td>
-                            <td>R$10,00</td>
-                            <td>22/03/2019</td>
-                        </tr>
-                        <tr>
-                            <td>100 Creditools</td>
-                            <td>R$10,00</td>
-                            <td>22/03/2019</td>
-                        </tr>
-                        <tr>
-                            <td>100 Creditools</td>
-                            <td>R$10,00</td>
-                            <td>22/03/2019</td>
-                        </tr>
-                        <tr>
-                            <td>100 Creditools</td>
-                            <td>R$10,00</td>
-                            <td>22/03/2019</td>
-                        </tr>
+                        {data.PurchaseInfo.map(purchase => {
+                            return (
+
+                                <tr>
+                                    <td>{purchase.quantity} Creditools</td>
+                                    <td>R${purchase.value},00</td>
+                                    <td>{purchase.date}</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </Table>
 
-                <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
-                    Adicionar Creditools
+                <CreditCard>
+                    <h1>Comprar créditos</h1>
+                    <div>
+                        <input type="text" id="name" name="name" placeholder="Nome Completo" />
+                        <input type="text" id="cpf" name="cpf" placeholder="CPF" />
+                    </div>
+                    <div>
+                        <input type="text" id="number" name="number" placeholder="Número do cartão" />
+                        <input type="text" id="date" name="date" placeholder="Validade" />
+                        <input type="text" id="cvv" name="cvv" placeholder="CVV" />
+                    </div>
+                    <div>
+                        <input type="text" id="quantity" name="quantity" placeholder="Quantidade" />
+                        <span>R$ XXX,00</span>
+                    </div>
+                </CreditCard>
+                <Link to="/">
+                    <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
+                        Adicionar Creditools
                 </button>
+                </Link>
             </Component>
 
         </Container >

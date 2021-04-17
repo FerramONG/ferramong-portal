@@ -48,3 +48,36 @@ export const Table = styled.table`
         padding:10px 30px;
     }
 `;
+
+export const CreditCard = styled.div`
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+
+    input{
+        background-color: #dedede;
+        font-size:1.2rem;
+        color:#5c5b5b;
+        margin:10px 5px;
+        padding:0.2rem;
+        border-radius: 5px;
+        border:none;
+        outline:none;
+    }
+    #name{
+        width:350px;
+    }
+    #cpf{
+        width:250px;
+    }
+    #date{
+        width:100px;
+    }
+    #cvv{
+        width:100px;
+    }
+    #quantity{
+        width:150px;
+    }
+`;
