@@ -12,7 +12,7 @@ const Home = () => {
             <ToolsContainer>
                 {data.map(purchase => {
                     return (
-                        <ToolBox img={purchase.img} name={purchase.name} category={purchase.category}
+                        <ToolBox name={purchase.name} category={purchase.category}
                     price={purchase.price} utility={purchase.utility} use={purchase.use}></ToolBox>
                     )
                 })}
