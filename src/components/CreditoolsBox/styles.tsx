@@ -81,4 +81,9 @@ export const CreditCard = styled.form`
     #quantity{
         width:150px;
     }
+
+    button{
+        border-radius:5px;
+        align-self: center;
+    }
 `;
