@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Component, CreateAccount } from './styles'
+import { Container, Component,} from './styles'
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -17,11 +17,8 @@ export default function LoginBox() {
                 <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
                         <input type="text" placeholder="CPF" {...register("cpf")}/>
                         <input type="password" placeholder="Senha" {...register("senha")}/>
-                        {/*<Link to={"/"}>*/}<input type="submit" value="Entrar" id="button"/> {/*</Link> com esse link pra outra página nao funcionava no console,tem que ver se na api vai*/}
+                        {/*<Link to={"/"}>*/}<input type="submit" value="Cadastrar-se" id="button"/> {/*</Link> com esse link pra outra página nao funcionava no console,tem que ver se na api vai*/}
                 </form>
-            <CreateAccount>
-                <h3>Não possui uma conta ainda? Cadastre-se <Link to="/register">aqui</Link> </h3>
-            </CreateAccount>
             </Component>
         </Container>
     )
