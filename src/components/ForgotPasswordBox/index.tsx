@@ -15,16 +15,15 @@ export default function LoginBox() {
     const onSubmit = (data) => {
         console.log('DADOS ENVIADOS PRA API:');
         console.log(data);
-        console.log(userCpf);
-        axios.post('https://ferramong-auth.herokuapp.com/accountManager/signUp',{
-            cpf: userCpf.toString(),
+        axios.post('https://ferramong-auth.herokuapp.com/accountManager/resetPassword',{
+            cpf: userCpf,
             secretAnswer: data.secretAnswer,
             newPassword: data.newPassword,
         })
         .then(response => {
             console.log('DADOS DE RESPOSTA CHANGEPASSWORD:');
             console.log(response);
-            history.push('./');
+            history.push('./login');
         })
         .catch(error => {
             console.log('DADOS DE ERRO CHANGEPASSWORD:');
