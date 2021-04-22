@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import { Container, Component, CreateAccount } from './styles'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from 'axios'
 
 export default function LoginBox() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data)
-    }
+    const history = useHistory();
 
+    const onSubmit = (data) => {
+        console.log('DADOS ENVIADOS PRA API:');
+        console.log(data);
+
+        axios.post('https://ferramong-auth.herokuapp.com/authenticator/login',{
+            cpf: data.cpf,
+            password: data.password,
+        })
+        .then(response => {
+            console.log('DADOS DE RESPOSTA:');
+            console.log(response);
+            history.push('./')
+        })
+        .catch(error => {
+            console.log('DADOS DE ERRO:');
+            console.log(error);
+        })
+    }
     return (
         <Container>
             <Component>
