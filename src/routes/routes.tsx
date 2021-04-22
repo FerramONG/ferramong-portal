@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Creditools from '../pages/Creditools'
 import Register from '../pages/Register'
+import ForgotPassword from '../pages/ForgotPassword'
 
 const Routes = () => {
     return (
@@ -13,6 +14,7 @@ const Routes = () => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/creditools" component={Creditools} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/forgotpassword" component={ForgotPassword} />
             </Switch>
         </BrowserRouter>
     );
