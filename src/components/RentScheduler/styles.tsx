@@ -5,11 +5,11 @@ export const Container = styled.div`
         font-family: 'Roboto', sans-serif;
         text-transform: unset !important;
         font-size:1.2rem;
-        background:#627fe7;
+        background:#599dba;
         box-shadow:none;
     }
     .button:hover{
-        background:#627fe7;
+        background:rgba(98, 127, 231,0.7);
         box-shadow:none;
     }
 `;

@@ -12,7 +12,7 @@ export default function Menu() {
                 <Link to='/'><img src={Logo} alt='logo ferramong'></img></Link>
                 <Link className="link" to="/"><Item>Ferramentas</Item></Link>
                 <Link className="link" to="/creditools"><Item>CrediTools</Item></Link>
-                <VisitSchedulerModal/>
+                <VisitSchedulerModal />
                 <Link className="link" to="login"><Login>Entrar</Login></Link>
             </NavBar>
         </Container>
