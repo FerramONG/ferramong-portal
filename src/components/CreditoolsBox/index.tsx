@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Component, Table, CreditCard } from './styles'
 import { useForm } from "react-hook-form";
 import data from '../../data/CreditoolsInfo'

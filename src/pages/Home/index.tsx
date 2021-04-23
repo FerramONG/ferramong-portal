@@ -3,20 +3,16 @@ import Menu from '../../components/Menu';
 import ToolBox from '../../components/ToolBox';
 import data from '../../data/ToolsInfo'
 import { ToolsContainer } from './styles'
+import { useLogin} from '../../context/GlobalState'
 
 
 const Home = () => {
 
-    const [search, setSearch] = useState('');
-    //const [filteredTools, setFilteredTools] = useState([]);
+    const { userId, setUserId, token, setToken } = useLogin();
 
-    // useEffect( ()=>{
-    //     setFilteredTools(
-    //         data.filter( tool => {
-    //             return tool.name.toLowerCase().includes(search.toLowerCase())
-    //         })
-    //     )
-    // },[search,filteredTools])
+    console.log("Está logado no HOME: "+userId + ' Com o token: '+ token);
+
+    const [search, setSearch] = useState('');
 
     const filteredTools = data.filter(tool => {
         return tool.name.toLowerCase().includes(search.toLowerCase())

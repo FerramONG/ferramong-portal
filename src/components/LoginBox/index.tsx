@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React,{useEffect} from 'react';
 import { Container, Component, CreateAccount } from './styles'
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
+//import GlobalState from '../../context/GlobalState';
+import { useLogin } from '../../context/GlobalState'
 
 export default function LoginBox() {
+    const { userId, setUserId, token, setToken } = useLogin();
+
+    useEffect(() => {
+        
+    }, []);
+    console.log("Está logado no LOGIN: " + userId + ' Com o token: ' + token);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -14,20 +22,24 @@ export default function LoginBox() {
         console.log('DADOS ENVIADOS PRA API:');
         console.log(data);
 
-        axios.post('https://ferramong-auth.herokuapp.com/authenticator/login',{
+        axios.post('https://ferramong-auth.herokuapp.com/authenticator/login', {
             cpf: data.cpf,
             password: data.password,
         })
-        .then(response => {
-            console.log('DADOS DE RESPOSTA:');
-            console.log(response);
-            history.push('./')
-        })
-        .catch(error => {
-            console.log('DADOS DE ERRO:');
-            console.log(error);
-        })
+            .then(response => {
+                console.log('DADOS DE RESPOSTA LOGIN:');
+                console.log(response);
+                history.push('./')
+                setUserId(response.data.id)
+                setToken(response.data.token)
+            })
+            .catch(error => {
+                console.log('DADOS DE ERRO:');
+                console.log(error);
+            })
     }
+
+
     return (
         <Container>
             <Component>

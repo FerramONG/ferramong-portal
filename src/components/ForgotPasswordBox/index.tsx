@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Component } from './styles'
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 

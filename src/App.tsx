@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.css';
 import Routes from "./routes/routes";
+import GlobalState from './context/GlobalState';
 
 function App() {
+  // const [state, setState] = useState({});
   return (
     <div className="App">
-      <Routes />
+      <GlobalState> 
+        <Routes />
+      </GlobalState>
+
     </div>
   );
 }
