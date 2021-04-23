@@ -1,10 +1,20 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Container, Component,} from './styles'
-import { Link,useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+//import GlobalState from '../../context/GlobalState';
+import { useLogin } from '../../context/GlobalState'
 
 export default function LoginBox() {
+
+    const { userId, setUserId,token, setToken } = useLogin();
+
+    useEffect(() => {
+
+    }, []);
+
+   console.log("Está logado no REGISTER: "+userId + ' Com o token: '+ token);
 
     const {register, handleSubmit, formState: { errors }} = useForm();
 
