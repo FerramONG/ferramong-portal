@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Component } from './styles'
 import {  useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { useLogin } from '../../context/GlobalState'
 
 export default function LoginBox() {
+
+    const { userId, setUserId, token, setToken } = useLogin();
+    const history = useHistory();
+    useEffect(() => {
+
+    }, []);
+    console.log("Está logado no CHANGEPASSWORD: " + userId + ' Com o token: ' + token);
+
     const [userQuestion, setUserQuestion] = useState('');
     const [userCpf, setUserCpf] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { register:register2, handleSubmit:handleSubmit2, formState: { errors:errors2 } } = useForm();
-    
-    const history = useHistory();
+
 
     const onSubmit = (data) => {
         console.log('DADOS ENVIADOS PRA API:');

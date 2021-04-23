@@ -1,9 +1,28 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Container, Component, Table, CreditCard } from './styles'
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import data from '../../data/CreditoolsInfo'
+import axios from 'axios'
+import { useLogin } from '../../context/GlobalState'
 
 const CreditoolsBox = () => {
+    const { userId, setUserId, token, setToken } = useLogin();
+    const history = useHistory();
+    useEffect(() => {
+        axios.get('https://ferramong-auth.herokuapp.com/authenticator/validateToken/' + token)
+        .then(response => {
+            console.log('DADOS DE RESPOSTA DA CONFIRMACAO DE TOKEN:');
+            console.log(response);
+        })
+        .catch(error => {
+            console.log('DADOS DE ERRO TOKEN:');
+            console.log(error);
+            alert('Usuário não logado')
+            history.push('./login');
+        })
+    }, []);
+    console.log("Está logado no CREDITOOLS: " + userId + ' Com o token: ' + token);
 
     const {register, handleSubmit} = useForm();
 
