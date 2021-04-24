@@ -63,8 +63,8 @@ export const CreditCard = styled.form`
         margin:10px 5px;
         padding:0.2rem;
         border-radius: 5px;
-        border:none;
-        outline:none;
+        border: none;
+        outline-color: grey;
     }
     #name{
         width:350px;

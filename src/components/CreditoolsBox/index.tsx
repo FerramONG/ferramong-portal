@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Container, Component, Table, CreditCard } from './styles'
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
@@ -24,10 +24,45 @@ const CreditoolsBox = () => {
     }, []);
     console.log("Está logado no CREDITOOLS: " + userId + ' Com o token: ' + token);
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, formState: { errors }} = useForm();
+    let cardUser = {
+        number: '',
+        cvv: 0,
+        owner: ''
+    };
 
     const onSubmit = (data) => {
+        console.log('-----DADOS DO CARTÂO------')
         console.log(data)
+        cardUser.number = data.cardNumber
+        cardUser.cvv = parseInt(data.cardCvv)
+        cardUser.owner = data.cardOwner
+        console.log('-----Card-----')
+        console.log(cardUser)
+
+        axios.post('https://ferramong-pay.herokuapp.com/buy/creditools/credit', {
+            idDweller: userId,
+            cardNumber:data.cardNumber,
+            cardCvv: parseInt(data.cardCvv),
+            cardOwner: data.cardOwner,
+            value: parseInt(data.value),
+            card: cardUser
+        })
+            .then(response => {
+                console.log('RESPOSTA DO ENVIO DO PAGAMENTO')
+                console.log(response)
+            })
+            .catch(error => {
+                console.log('DEU ERRO NO PAGAMENTO')
+                console.log(error)
+            })
+    }
+
+    const [price, setPrice] = useState(0);
+
+    const onPrice = (data) => {
+        let valueToPay = data/10;
+        setPrice(valueToPay)
     }
 
     return (
@@ -58,17 +93,19 @@ const CreditoolsBox = () => {
                 <CreditCard onSubmit={handleSubmit(onSubmit)}>
                     <h1>Comprar créditos</h1>
                     <div>
-                        <input type="text" id="name" placeholder="Nome Completo" {...register("name")} />
-                        <input type="text" id="cpf" placeholder="CPF" {...register("cpf")} />
+                        <input type="text" id="cardOwner" placeholder="Nome Completo" {...register("cardOwner", { required: true })} />
+                        {errors.cardOwner && errors.cardOwner.type === "required"}
+                        <input type="text" id="cpf" placeholder="CPF" {...register("cpf", { required: true })} />
+                        {errors.cpf && errors.cpf.type === "required"}
                     </div>
                     <div>
-                        <input type="text" id="number" placeholder="Número do cartão" {...register("number")} />
-                        <input type="text" id="date" placeholder="Validade" {...register("date")} />
-                        <input type="text" id="cvv" placeholder="CVV" {...register("cvv")}/>
+                        <input type="text" id="number" placeholder="Número do cartão" {...register("cardNumber", { required: true })} />
+                        <input type="text" id="date" placeholder="Validade" {...register("date", { required: true })} />
+                        <input type="text" id="cvv" placeholder="CVV" {...register("cardCvv", { required: true })}/>
                     </div>
                     <div>
-                        <input type="text" id="quantity" placeholder="Quantidade" {...register("quantity")}/>
-                        <span>R$ XXX,00</span>
+                        <input type="text" id="quantity" placeholder="Quantidade" {...register("value", { required: true })} onChange={e => onPrice(e.target.value)}/>
+                        <span>R$ {price}</span>
                     </div>
                 
                     <button type="submit" className="expandedContainerButton" >
