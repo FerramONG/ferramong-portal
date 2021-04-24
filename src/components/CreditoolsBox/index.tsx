@@ -9,6 +9,7 @@ import { useLogin } from '../../context/GlobalState'
 const CreditoolsBox = () => {
     const { userId, setUserId, token, setToken } = useLogin();
     const history = useHistory();
+    const [userPurchases, setUserPurhcases] = useState([]);
     useEffect(() => {
         axios.get('https://ferramong-auth.herokuapp.com/authenticator/validateToken/' + token)
         .then(response => {
@@ -20,6 +21,17 @@ const CreditoolsBox = () => {
             console.log(error);
             alert('Usuário não logado')
             history.push('./login');
+        })
+
+        axios.get('https://ferramong-pay.herokuapp.com/purchases/creditools/dweller/' + userId)
+        .then(response => {
+            console.log('------DADOS DE COMPRAS DO USUÁRIO:-----');
+            console.log(response.data);
+            setUserPurhcases(response.data)
+        })
+        .catch(error => {
+            console.log('DADOS DE ERRO COMPRAS:');
+            console.log(error);
         })
     }, []);
     console.log("Está logado no CREDITOOLS: " + userId + ' Com o token: ' + token);
@@ -75,18 +87,22 @@ const CreditoolsBox = () => {
                     <tbody>
                         <tr>
                             <td>Quantidade adquirida</td>
-                            <td>Valor gasto</td>
                             <td>Data</td>
                         </tr>
-                        {data.PurchaseInfo.map(purchase => {
-                            return (
-                                <tr>
-                                    <td>{purchase.quantity} Creditools</td>
-                                    <td>R${purchase.value},00</td>
-                                    <td>{purchase.date}</td>
-                                </tr>
-                            )
-                        })}
+                        {
+                            userPurchases.map(purchase => {
+                                const date = new Date(purchase['date'])
+                                const month = '' + (date.getMonth() + 1)
+                                const day = '' + date.getDate()
+                                const year = date.getFullYear();
+                                return(
+                                    <tr>
+                                        <td>{purchase['total']} Creditools</td>
+                                        <td>{day + ' / ' + month + ' / ' + year}</td>
+                                    </tr>
+                                )
+                            })
+                        }
                     </tbody>
                 </Table>
 
@@ -106,6 +122,9 @@ const CreditoolsBox = () => {
                     <div>
                         <input type="text" id="quantity" placeholder="Quantidade" {...register("value", { required: true })} onChange={e => onPrice(e.target.value)}/>
                         <span>R$ {price}</span>
+                        {/* <input type="radio" value="Credit">Crédito</input>
+                        <input type="radio" value="Debit">Débito</input> */}
+                        
                     </div>
                 
                     <button type="submit" className="expandedContainerButton" >

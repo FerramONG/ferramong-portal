@@ -37,9 +37,10 @@ export default function LoginBox() {
             .then(response => {
                 console.log('DADOS DE RESPOSTA LOGIN:');
                 console.log(response);
-                history.push('./')
+                history.push('./login')
                 setUserId(response.data.id)
                 setToken(response.data.token)
+                history.push('./')
             })
             .catch(error => {
                 console.log('DADOS DE ERRO:');

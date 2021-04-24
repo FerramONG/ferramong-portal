@@ -34,6 +34,7 @@ export default function LoginBox() {
         .then(response => {
             console.log('DADOS DE RESPOSTA:');
             console.log(response);
+            history.push('./register');
             history.push('./');
         })
         .catch(error => {
