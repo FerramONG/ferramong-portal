@@ -14,7 +14,7 @@ export default function LoginBox() {
         .then(response => {
             console.log('DADOS DE RESPOSTA DA CONFIRMACAO DE TOKEN:');
             console.log(response);
-            alert('usuário já logado')
+            //alert('usuário já logado')
             history.push('./');
         })
         .catch(error => {

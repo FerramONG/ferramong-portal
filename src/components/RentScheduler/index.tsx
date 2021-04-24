@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(
 });
 
 
-export default function VisitSchedulerModal() {
+export default function VisitSchedulerModal(props) {
   const { userId, setUserId, token, setToken } = useLogin();
 
   const [openScheduleVisit, setOpenScheduleVisit] = React.useState(false);
@@ -75,7 +75,7 @@ export default function VisitSchedulerModal() {
   return (
     <Container>
       <Button className="button" variant="contained" color="primary" onClick={handleClickOpen}>
-        Emprestar ferramenta
+        {props.title}
       </Button>
       <Dialog
         open={openScheduleVisit}

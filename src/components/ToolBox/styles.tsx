@@ -102,7 +102,23 @@ export const ExtraInfo = styled.div`
 export const Send = styled.div`
     display:flex;
     align-self:center;
+    justify-content: center;
     span{
         font-size:1rem;
+    }
+    button{
+        align-self:center;
+        font-size:1.5rem;
+        background-color: #599dba;
+    }
+`;
+
+export const Dates = styled.div`
+    display:flex;
+    align-self:center;
+    justify-content: space-between;
+
+    #date_component{
+        margin: 0.2rem 1rem;
     }
 `;
