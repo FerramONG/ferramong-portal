@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send, Dates} from './styles'
+import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send, Dates } from './styles'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import RentSchedulerModal from '../RentScheduler';
@@ -15,8 +15,8 @@ interface ToolProps {
 export default function ToolBox(props: ToolProps) {
 
     const rentAction = () => {
- /*Aqui vou ter que passar pra um state que vai ter que ser global, com as datas de inicio e fim de aluguel,
- como o RentScheduler não retorna aqui as datas, vai ter que ser stado global*/
+        /*Aqui vou ter que passar pra um state que vai ter que ser global, com as datas de inicio e fim de aluguel,
+        como o RentScheduler não retorna aqui as datas, vai ter que ser stado global*/
     }
 
     const [expandedContainer, setExpandedContainer] = useState(false);
@@ -49,10 +49,10 @@ export default function ToolBox(props: ToolProps) {
 
             <Send className={expandedContainer ? "display" : "noDisplay"}>
                 <Dates>
-                   <div id="date_component"> <RentSchedulerModal title="Data de início"/></div>
-                    <div id="date_component"><RentSchedulerModal title="Data de devolução"/></div>
-                    <button id="date_component"  onClick={() => rentAction()}>Alugar</button>
-                </Dates>    
+                    <div id="date_component"> <RentSchedulerModal title="Data de início" /></div>
+                    <div id="date_component"><RentSchedulerModal title="Data de devolução" /></div>
+                    <button id="date_component" onClick={() => rentAction()}>Alugar</button>
+                </Dates>
             </Send>
 
             <button type="button" className="expandedContainerButton" onClick={() => changeButton()}>
