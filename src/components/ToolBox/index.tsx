@@ -2,21 +2,57 @@ import React, { useState } from 'react';
 import { Container, MainInfo, LeftPannel, NameCategory, ExtraInfo, Send, Dates } from './styles'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import RentSchedulerModal from '../RentScheduler';
+import AddToolSchedulerStart from '../AddToolSchedulerStart';
+import AddToolSchedulerEnd from '../AddToolSchedulerEnd';
+import { useLogin } from '../../context/GlobalState'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 interface ToolProps {
     name: string;
     category: string;
+    ownerId: number;
     price: string;
     utility: string;
     use: string;
+    toolId: number;
+    availableUntil: string;
 }
 
 export default function ToolBox(props: ToolProps) {
+    const { userId, setUserId, token, setToken, startDateTool, setStartDateTool, endDateTool, setEndDateTool } = useLogin();
+    let history = useHistory();
+    let ownerId = props.ownerId;
+    let rentedToolId = props.toolId
 
     const rentAction = () => {
-        /*Aqui vou ter que passar pra um state que vai ter que ser global, com as datas de inicio e fim de aluguel,
-        como o RentScheduler não retorna aqui as datas, vai ter que ser stado global*/
+        axios.get('https://ferramong-auth.herokuapp.com/authenticator/validateToken/' + token)
+            .then(response => {
+                console.log('DADOS DE RESPOSTA DA CONFIRMACAO DE TOKEN:');
+                console.log(response);
+            })
+            .catch(error => {
+                console.log('DADOS DE ERRO TOKEN:');
+                console.log(error);
+                alert('Necessário estar logado para alugar uma ferramenta')
+                history.push('./login');
+            })
+        axios.post('https://ferramong-tools-manager.herokuapp.com/rentals', {
+            ownerDwellerId: ownerId,
+            renterDwellerId: userId,
+            toolId: rentedToolId,
+            returnDate: endDateTool,
+        })
+            .then(response => {
+                console.log('RESPOSTA DO ALUGAR FERRAMENTA: ');
+                console.log(response);
+
+            })
+            .catch(error => {
+                console.log('ERRO DO ALUGAR FERRAMENTA: ');
+                console.log(error);
+            })
+
     }
 
     const [expandedContainer, setExpandedContainer] = useState(false);
@@ -45,12 +81,13 @@ export default function ToolBox(props: ToolProps) {
             <ExtraInfo className={expandedContainer ? "display" : "noDisplay"}>
                 <h4><b>Utilidade: </b>{props.utility}</h4>
                 <h4><b>Como usar: </b>{props.use}</h4>
+                <h4><b>Disponível até: </b>{props.availableUntil}</h4>
             </ExtraInfo>
 
             <Send className={expandedContainer ? "display" : "noDisplay"}>
                 <Dates>
-                    <div id="date_component"> <RentSchedulerModal title="Data de início" /></div>
-                    <div id="date_component"><RentSchedulerModal title="Data de devolução" /></div>
+                    <div id="date_component"> <AddToolSchedulerStart title="Data de início" /></div>
+                    <div id="date_component"><AddToolSchedulerEnd title="Data de devolução" /></div>
                     <button id="date_component" onClick={() => rentAction()}>Alugar</button>
                 </Dates>
             </Send>

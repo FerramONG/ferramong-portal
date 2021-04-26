@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,7 +13,6 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { DialogContentText } from '@material-ui/core';
 import { Container } from "./styles"
 import { useLogin } from '../../context/GlobalState'
-import { useHistory } from 'react-router-dom'
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -22,31 +21,41 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+// interface PropTypes {
+//   userId: string
+// }
 
-export default function VisitSchedulerModal() {
-  const { userId, setUserId, token, setToken } = useLogin();
-
+export default function VisitSchedulerModal(props) {
+  const { userId, setUserId, token, setToken, startDateTool, setStartDateTool, endDateTool, setEndDateTool } = useLogin();
+  // const { userId } = props;
   const [openScheduleVisit, setOpenScheduleVisit] = React.useState(false);
   const [openCancelVisit, setOpenCancelVisit] = React.useState(false);
+  const [dateChecked, setDateChecked] = React.useState(false);
   //const [hasVisit, setHasVisit] = React.useState(false);
   const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate>(new Date());
-  let history = useHistory();
+
+  let fullDate, month, day, year;
+  const [gambiarra, setGambiarra] = React.useState(0);
+  useEffect(() => {
+    if (gambiarra == 2) {
+      console.log('ALERTA!ENTROU NO IF DO GAMBIARRA==2')
+      // setStartDateTool(fullDate)
+      console.log(endDateTool)
+    }
+    console.log('DEPOIS DO IF,VAMOS VER O VALOR DE STARTDATE')
+    console.log(endDateTool)
+    setGambiarra(gambiarra => gambiarra + 1);
+    //console.log(gambiarra)
+  }, [endDateTool]);
 
   const handleClickOpen = () => {
-    axios.get('https://ferramong-scheduler.herokuapp.com/scheduler/dweller/' + userId).then((response) => {
-      if (response.data[0] !== undefined) {
-        console.log("Data já marcada para esse usuário")
-        console.log(response);
-        setSelectedDate(new Date(Date.parse(response.data[0].date)));
-        setOpenCancelVisit(true);
-      } else {
-        setOpenScheduleVisit(true);
-      }
-    }, (error) => {
-      console.log(error);
-      alert("Necessário estar logado")
-      history.push('./login')
-    })
+
+    if (!dateChecked) {
+      setOpenScheduleVisit(true);
+    }
+    else {
+      setOpenCancelVisit(true);
+    }
   };
 
   const handleCloseVisit = () => {
@@ -59,26 +68,33 @@ export default function VisitSchedulerModal() {
 
   const handleConfirmVisit = () => {
     //setHasVisit(true);
-    console.log('Data agendada')
-    console.log(selectedDate);
+    console.log('SELECTED DATE')
+    month = '' + (selectedDate.getMonth() + 1)
+    day = '' + selectedDate.getDate()
+    year = selectedDate.getFullYear();
+    if(month<10){
+      fullDate = year + '-0' + month + '-' + day;
+    }else{
+      fullDate = year + '-' + month + '-' + day;
+    }
+    setEndDateTool(fullDate);
     setOpenScheduleVisit(false);
-    axios.post('https://ferramong-scheduler.herokuapp.com/scheduler/', {
-      idDweller: parseInt(userId),
-      date: selectedDate?.toISOString(),
-    });
+    setDateChecked(true);
+    console.log(endDateTool);
   };
 
   const handleDeleteVisit = () => {
     //setHasVisit(false);
     //console.log(hasVisit)
+    setDateChecked(false);
     setOpenCancelVisit(false)
-    axios.delete('https://ferramong-scheduler.herokuapp.com/scheduler/' + userId);
+    setEndDateTool(undefined)
   }
 
   return (
     <Container>
       <Button className="button" variant="contained" color="primary" onClick={handleClickOpen}>
-        Emprestar ferramenta
+        {props.title}
       </Button>
       <Dialog
         open={openScheduleVisit}
@@ -88,10 +104,10 @@ export default function VisitSchedulerModal() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Quer emprestar suas ferramentas?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{"Quer marcar a disponibilidade?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Marque aqui uma data para fazer uma visita e levar sua ferramenta à ONG
+            Marque aqui uma data
           </DialogContentText>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDateTimePicker
@@ -121,18 +137,18 @@ export default function VisitSchedulerModal() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Sua visita marcada"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{"Sua data já foi marcada"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Você já tem uma visita marcada para {selectedDate?.toLocaleString()}
+            Você já tem uma data marcada para {selectedDate?.toLocaleString()}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseCancelVisit} color="primary">
-            voltar
+            Voltar
           </Button>
           <Button onClick={handleDeleteVisit} color="secondary">
-            Cancelar visita
+            Cancelar data
           </Button>
         </DialogActions>
       </Dialog>

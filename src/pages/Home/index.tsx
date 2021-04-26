@@ -15,19 +15,19 @@ const Home = () => {
 
     console.log("Está logado no HOME: " + userId + ' Com o token: ' + token);
     let history = useHistory();
-    useEffect(() => {
-        axios.get('https://ferramong-auth.herokuapp.com/authenticator/validateToken/' + token)
-            .then(response => {
-                console.log('DADOS DE RESPOSTA DA CONFIRMACAO DE TOKEN:');
-                console.log(response);
-            })
-            .catch(error => {
-                console.log('DADOS DE ERRO TOKEN:');
-                console.log(error);
-                //alert('Usuário não logado')
-                //history.push('./login');
-            })
-    }, []);
+    // useEffect(() => {
+    //     axios.get('https://ferramong-auth.herokuapp.com/authenticator/validateToken/' + token)
+    //         .then(response => {
+    //             console.log('DADOS DE RESPOSTA DA CONFIRMACAO DE TOKEN:');
+    //             console.log(response);
+    //         })
+    //         .catch(error => {
+    //             console.log('DADOS DE ERRO TOKEN:');
+    //             console.log(error);
+    //             //alert('Usuário não logado')
+    //             //history.push('./login');
+    //         })
+    // }, []);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [searchedTool, setSearchedTool] = useState([]);
@@ -62,18 +62,12 @@ const Home = () => {
                     </div>
                     {errors.toolName && errors.toolName.type === "required" && <span>Digite uma ferramenta</span>}
                 </form>
-                {/* <input type="text" placeholder="Pesquisar ferramenta" onChange={e => setSearch(e.target.value)} /> */}
-                {/* {filteredTools.map(purchase => {
-                    return (
-                        <ToolBox name={purchase.name} category={purchase.category}
-                            price={purchase.price} utility={purchase.utility} use={purchase.use}></ToolBox>
-                    )
-                })} */}
 
                 {searchedTool.map(tool => {
                     return(
-                        <ToolBox name={tool['name']} category={tool['category']}
-                            price={tool['price']} utility={tool['description']} use={tool['instructions']}></ToolBox>
+                        <ToolBox name={tool['name']} category={tool['category']} ownerId={tool['ownerId']}
+                        price={tool['price']} utility={tool['description']} use={tool['instructions']} 
+                        toolId={tool['id']} availableUntil={tool['availableUntil']}/>
                     )
                 })
                 }

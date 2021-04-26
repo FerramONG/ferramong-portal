@@ -109,7 +109,10 @@ export const Send = styled.div`
     button{
         align-self:center;
         font-size:1.5rem;
-        background-color: #599dba;
+        background-color: tomato;
+    }
+    button:hover{
+        background-color: rgba(255,99,71,0.6);
     }
 `;
 
