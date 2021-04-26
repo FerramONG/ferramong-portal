@@ -46,7 +46,7 @@ export default function ToolBox(props: ToolProps) {
             .then(response => {
                 console.log('RESPOSTA DO ALUGAR FERRAMENTA: ');
                 console.log(response);
-
+                alert('Ferramenta '+response.data.name+' alugada até: '+response.data.expectedReturnDate)
             })
             .catch(error => {
                 console.log('ERRO DO ALUGAR FERRAMENTA: ');
