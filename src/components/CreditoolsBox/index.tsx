@@ -63,10 +63,12 @@ const CreditoolsBox = () => {
             .then(response => {
                 console.log('RESPOSTA DO ENVIO DO PAGAMENTO')
                 console.log(response)
+                alert('Compra feita com sucesso!')
             })
             .catch(error => {
                 console.log('DEU ERRO NO PAGAMENTO')
                 console.log(error)
+                alert('Ocorreu um erro em sua compra...')
             })
     }
 
