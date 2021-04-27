@@ -82,7 +82,7 @@ const CreditoolsBox = () => {
     return (
         <Container>
             <Component>
-                <h2>Saldo atual: XXXX Creditools</h2>
+                {/* <h2>Saldo atual: XXXX Creditools</h2> */}
                 <h1>Histórico de compras</h1>
 
                 <Table>
