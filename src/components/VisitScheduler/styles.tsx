@@ -5,7 +5,7 @@ export const Container = styled.div`
         font-family: 'Roboto', sans-serif;
         text-transform: unset !important;
         font-size:1.2rem;
-        background:#627fe7;
+        background:#292929;
         box-shadow:none;
     }
     .button:hover{
