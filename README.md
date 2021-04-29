@@ -3,7 +3,7 @@
 </p>
 
 <h1 align='center'>FerramONG - Portal</h1>
-<p align='center'>Platform administrator system.</p>
+<p align='center'>Platform main system.</p>
 <p align="center">
   <a href="https://github.com/FerramONG/ferramong-portal/actions/workflows/windows.yml"><img src="https://github.com/FerramONG/ferramong-portal/actions/workflows/windows.yml/badge.svg" alt=""></a>
 	<a href="https://github.com/FerramONG/ferramong-portal/actions/workflows/macos.yml"><img src="https://github.com/FerramONG/ferramong-portal/actions/workflows/macos.yml/badge.svg" alt=""></a>
